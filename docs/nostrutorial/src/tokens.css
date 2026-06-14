@@ -1,0 +1,201 @@
+/* ============================================================
+   NOSTRUTORIAL — Design tokens & base
+   KYRA LABS palette (orange / cyan / red) on warm paper,
+   warm charcoal ink, a muted Nostr-purple nod.
+   ============================================================ */
+
+:root {
+  /* — Surfaces (warm paper, low chroma) — */
+  --bg:            #F4F0E8;   /* page paper */
+  --bg-2:          #EBE4D8;   /* sunken / rails */
+  --card:          #FBF9F4;   /* raised card */
+  --card-2:        #FFFFFF;   /* pure card for focus moments */
+  --line:          #E6DECF;   /* hairline border */
+  --line-strong:   #D7CDBA;
+
+  /* — Ink (warm charcoal, never pure black) — */
+  --ink:           #2A2622;
+  --ink-2:         #5A5249;
+  --ink-3:         #897F70;   /* tertiary / captions */
+
+  /* — Primary accent — KYRA naranja — swappable via Tweaks — */
+  --accent:        #E36F46;
+  --accent-deep:   #C8542E;   /* hover / pressed */
+  --accent-tint:   #F8DDD0;   /* soft fill */
+  --accent-tint-2: #FCEDE6;
+  --on-accent:     #3A1A0E;   /* dark text on orange */
+
+  /* — Calm technical (inspector / JSON / relay) — KYRA cian — */
+  --tech:          #1391B5;
+  --tech-deep:     #0E7186;
+  --tech-tint:     #D7EEF6;
+  --tech-ink:      #0B5567;
+  --tech-bright:   #00ADD8;   /* brand cyan for live accents */
+
+  /* — Nostr-real brand nod (muted purple) — used sparingly — */
+  --nostr:         #7A5BBE;
+  --nostr-deep:    #5E43A0;
+  --nostr-tint:    #ECE6F6;
+
+  /* — Semantic states — */
+  --ok:            #3E7D53;
+  --ok-tint:       #E0EEE2;
+  --warn:          #B07A1E;
+  --warn-tint:     #F6E9CC;
+  --err:           #9E2023;   /* KYRA rojo */
+  --err-tint:      #F1DADA;
+
+  /* — Type — KYRA uses Helvetica; warm serif for display — */
+  --font-head: "Literata", Georgia, serif;
+  --font-body: "Helvetica Neue", Helvetica, "Hanken Grotesk", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* — Radii — */
+  --r-sm: 8px;
+  --r:    12px;
+  --r-lg: 18px;
+  --r-xl: 26px;
+  --r-pill: 999px;
+
+  /* — Shadow (soft, warm) — */
+  --sh-1: 0 1px 2px rgba(60,46,24,.05), 0 2px 6px rgba(60,46,24,.05);
+  --sh-2: 0 2px 6px rgba(60,46,24,.06), 0 10px 26px rgba(60,46,24,.08);
+  --sh-3: 0 8px 20px rgba(60,46,24,.10), 0 24px 60px rgba(60,46,24,.12);
+
+  /* — Spacing base — */
+  --gap: 8px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-head);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0;
+  text-wrap: balance;
+}
+
+p { margin: 0; text-wrap: pretty; }
+
+a { color: inherit; }
+
+::selection { background: var(--accent-tint); color: var(--ink); }
+
+/* Focus — always visible, never color-alone */
+:focus-visible {
+  outline: 2.5px solid var(--tech);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 15px;
+  border: 0;
+  border-radius: var(--r-pill);
+  padding: 13px 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  cursor: pointer;
+  transition: transform .12s ease, background .15s ease, box-shadow .15s ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn:active { transform: translateY(1px); }
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--on-accent);
+  box-shadow: 0 1px 0 rgba(255,255,255,.4) inset, var(--sh-1);
+}
+.btn-primary:hover { background: var(--accent-deep); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1.5px solid var(--line-strong);
+}
+.btn-ghost:hover { background: var(--card); border-color: var(--ink-3); }
+
+.btn-quiet {
+  background: transparent;
+  color: var(--ink-2);
+  padding: 10px 14px;
+}
+.btn-quiet:hover { color: var(--ink); background: rgba(0,0,0,.03); }
+
+.btn-tech {
+  background: var(--tech);
+  color: #fff;
+}
+.btn-tech:hover { background: var(--tech-deep); }
+
+/* ---------- Chips / tags ---------- */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: .01em;
+  padding: 5px 11px;
+  border-radius: var(--r-pill);
+  background: var(--bg-2);
+  color: var(--ink-2);
+  border: 1px solid var(--line);
+}
+.chip-accent { background: var(--accent-tint); color: var(--accent-deep); border-color: transparent; }
+.chip-tech   { background: var(--tech-tint); color: var(--tech-ink); border-color: transparent; }
+.chip-nostr  { background: var(--nostr-tint); color: var(--nostr-deep); border-color: transparent; }
+.chip-ok     { background: var(--ok-tint); color: var(--ok); border-color: transparent; }
+.chip-ephemeral { background: var(--warn-tint); color: var(--warn); border-color: transparent; }
+
+/* ---------- Cards ---------- */
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-1);
+}
+
+/* small mono kbd-like token */
+.mono { font-family: var(--font-mono); }
+.eyebrow {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* dotted inline descriptor */
+.descriptor {
+  border-bottom: 2px dotted var(--accent);
+  cursor: help;
+  font-weight: 600;
+  position: relative;
+  white-space: nowrap;
+}
+
+/* reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
